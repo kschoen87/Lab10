@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{hanging}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{longtable}
+%\usepackage{lipsum} %remove later
+\doublespacing
+%\setlength\parindent{28 pt}
+\geometry{letterpaper, margin=1in}
+
+% ++++ Fancy Settings (for header) ++++
+\pagestyle{plain}
+\fancypagestyle{main}{
+	\fancyhf{}
+	\lhead{Lab 10}
+	\rhead{\leftmark}
+	\cfoot{\thepage}
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+% Column widths (tweak the numbers if you want)
+\newcommand{\colNum}{0.06\linewidth}   % column 1 (1–10)
+\newcommand{\colSmall}{0.16\linewidth} % columns 2,3,5
+\newcommand{\colBig}{0.48\linewidth}   % column 4 (3x colSmall)
+
+% ++++ Begin Doc ++++
+
+\begin{document}
+
+% ++++ Cover Page ++++
+
+\begin{titlepage}
+\centering
+\vfill
+
+% ++Logo
+\includegraphics[width=0.35\textwidth]{images/logo.png}
+
+\vspace{1.5cm}
+
+% ++Title
+\LARGE{\textbf{Lab 10: Vulnerability Scanning}}\\
+\vspace{0.3cm}
+\large{\textbf{Keith Schoen}}\\
+\vspace{0.3cm}
+\large{\textbf{CSEC3755-001}}\\
+\vspace{0.3cm}
+\large{\textbf{Dr. Daniel Pittman}}\\
+\vspace{0.3cm}
+\large{\textbf{16 April, 2026}}\\
+\vspace{0.3cm}
+
+\vfill
+\end{titlepage}
+
+% ++++ ToC ++++
+
+\pagenumbering{gobble} %hide page numbers for cover and ToC
+\tableofcontents
+\clearpage
+
+% ++++ Begin Report ++++
+
+\pagenumbering{arabic} %page one starts here
+\setcounter{page}{1}
+\pagestyle{main} %turn on fancy
+
+% ++++ Part 01 ++++
+\section{Network Discovery with Nmap}
+
+% +++ 1.1 +++
+\subsection{Host Discovery Scan}
+\includegraphics[width=0.8\textwidth]{images/1.1.png}\\ \textit{Figure 1: Nmap host discovery scan results.}
+
+% +++ 1.2 +++
+\subsection{Service Version Detection}
+\includegraphics[width=0.60\textwidth]{images/1.2.1.png}\\ 
+\includegraphics[width=0.60\textwidth]{images/1.2.2.png}\newpage 
+\noindent \includegraphics[width=0.60\textwidth]{images/1.2.3.png}\\ 
+\includegraphics[width=0.60\textwidth]{images/1.2.4.png}\\ 
+\textit{Figure 2: Nmap service version detection results.}
+
+% +++ 1.3 +++
+\subsection{OS Detection}
+\includegraphics[width=0.8\textwidth]{images/1.3.png}\\ \textit{Figure 3: Nmap OS detection results.}
+\newpage
+\subsection {Documentation}
+
+{\singlespace
+    \begin{longtable}{
+        || >{\centering\arraybackslash}p{\colNum}
+        | >{\raggedright\arraybackslash}p{\colSmall}
+        | >{\raggedright\arraybackslash}p{\colBig}
+        | >{\raggedright\arraybackslash}p{\colSmall} ||}
+        \hline
+        \textbf{\small Port \& Protocol} &
+        \textbf{\small Service Name \& Version} &
+        \textbf{\small What this service does} &
+        \textbf{\small Should it be externally accessible and why} \\
+        \hline\hline
+        \endfirsthead
+        \hline
+        \textbf{\small Port \& Protocol} &
+        \textbf{\small Service Name \& Version} &
+        \textbf{\small What this service does} &
+        \textbf{\small Should it be externally accessible and why} \\
+        \hline\hline
+        \endhead
+        \hline
+        \endfoot
+        \hline\hline
+        \endlastfoot
+        21 TCP & FTP (vsftpd 2.0.8+) & File Transfer Protocol, used for transferring files between hosts; this instance allows anonymous login with no encryption. & No. Unencrypted and anonymous access is a serious risk; use SFTP instead. \\
+        \hline
+        22 TCP & SSH (OpenSSH 9.6p1) & Secure Shell, used for secure remote login and command execution. & Limited. Restrict to known IPs or a VPN; never expose to the open internet. \\
+        \hline
+        25 TCP & SMTP (MedTech SMTP v1.4) & Simple Mail Transfer Protocol, used for sending emails between servers. & No. Open SMTP relays invite spam abuse; the VRFY command is also exposed, creating a user enumeration risk. \\
+        \hline
+        80 TCP & HTTP (Werkzeug 2.2.0/Python 3.9.25) & Hypertext Transfer Protocol, used for serving web pages. & No. A patient portal must use HTTPS (port 443); plain HTTP transmits credentials and PHI in cleartext. \\
+        \hline
+        139 TCP & NetBIOS-SSN (Samba, legacy) & Legacy Windows networking protocol used for file and printer sharing on local networks. & No. NetBIOS should never be internet-facing; it is a common target for lateral movement attacks. \\
+        \hline
+        445 TCP & SMB (Samba 4.15.13-Ubuntu) & Windows file-sharing protocol that allows shared drives and printers across a network. & No. SMB exposed externally is extremely dangerous (WannaCry, EternalBlue); message signing is also disabled on this host. \\
+        \hline
+        3306 TCP & MySQL (MySQL 8.0.45) & Relational database management system storing application data. & No. Databases should never be directly internet-facing; access should only occur via the application layer on localhost. \\
+        \hline
+    \end{longtable}
+}
+\noindent \textit{Table 1: Documentation of discovered services. \\ After logging my inital findings, I rand the results through Claude to see what else it found. The final three entries (and the note about VRFY in port 25) are results of its findings.}
+
+% ++++ Part 02 ++++
+\section{Nmap Vulnerability Scanning (NSE)}
+
+% +++ 2.1 +++
+\subsection{General Vulnerability Scan}
+\includegraphics[width=0.50\textwidth]{images/2.1.1.png} \includegraphics[width=0.50\textwidth]{images/2.1.2.png}\\ \textit{Figure 4: Nmap vulnerability scan results.}
+
+% +++ 2.2 +++
+\subsection{Targeted Service Scripts}
+% +++ FTP (port 21) Scan +++
+\includegraphics[width=0.50\textwidth]{images/2.2.1.png}\\ \textit{Figure 5: Nmap targeted FTP (port 21) service script results.}\\
+% +++ SMB (port 445) Scan +++
+\includegraphics[width=0.50\textwidth]{images/2.2.2.png}\\ \textit{Figure 6: Nmap targeted SMB (port 445) service script results.}\\
+\ \\
+% +++ MySQL (port 3306) Scan +++
+\includegraphics[width=0.50\textwidth]{images/2.2.3.png}\\ \textit{Figure 7: Nmap targeted MySQL (port 3306) service script results.}\\
+
+% +++ 2.3 +++
+\subsection{CVE Findings}
+\textit{CVE-2002-0597 (Port 445)}
+\begin{itemize}
+	\item \textbf{CVSS Score:} 5.0 (Medium)
+	\item \textbf{Description:} LANMAN service on Microsoft Windows 2000 allows remote attackers to cause a denial of service (CPU/memory exhaustion) via a stream of malformed data to microsoft-ds port 445.
+\end{itemize}
+\newpage
+\textit{CVE-2026-33643 (Port 3306)}
+\begin{itemize}
+	\item \textbf{CVSS Score:} N/A (not yet scored)
+	\item \textbf{Description:} SQL Injection vulnerability in SchemaHero 0.23.0 via the column parameter to the mysqlColumnAsInsert function in file plugins/mysql/lib/column.go.
+\end{itemize}
+
+% ++++ Part 03 ++++
+\section{OpenVAS Full Scan}
+
+% +++ 3.2 +++
+\subsection{Creating a Scan Target}
+\includegraphics[width=0.50\textwidth]{images/3.1.png}\\ \textit{Figure 8: OpenVAS scan target configuration.}
+
+% +++ 3.3 +++
+\subsection{Creating and Running a Scan Task}
+\textit{Note about the lab: This part was messy, to put it likely. I ran into one reoccuring problem over a couple of dozens of scans where the scans themselves just seemed to slide off of the target. Logs showed that ever scan was starting and ending without running any plugins against the target (although it was discovered alive). \\
+After over six hours of troubleshooting, I nuked the gvm build and restarted from scratch. }
+
+\vfill
+\textit{++report written with (minimal) help from Claude (Sonnet 4.6)++}
+\end{document}
+
+% +++++++++ Helpful stuff +++++++++++
+%
+% +++ Using Minipages +++
+% \begin{minipage}[t]{\linewidth}
+% \includegraphics[width=0.50\textwidth]{*Image file}\\
+% \textit{*Image subtitle}
+% \end{minipage}
+% \end{enumerate}
+%
+
+% +++ For tables that take multiple pages +++
+%{\singlespacing
+%	\begin{longtable}{
+% 		|| >{\centering\arraybackslash}p{\colNum}
+%  		| >{\raggedright\arraybackslash}p{\colSmall}
+%  		| >{\raggedright\arraybackslash}p{\colSmall}
+%  		| >{\raggedright\arraybackslash}p{\colBig}
+%  		| >{\raggedright\arraybackslash}p{\colSmall} ||}
+%		\hline
+%		\textbf{x} & \textbf{x} & \textbf{x} & \textbf{x} & \textbf{x} \\
+%		\hline\hline
+%		\endhead
+%		\hline
+%  	    	 x & x & x & x  & x \\
+%		\hline
+%	\end{longtable}
+%}
+
+
+
+
+
+
+
+
+
+
+
+
