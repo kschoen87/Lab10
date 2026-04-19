@@ -177,8 +177,14 @@
 % +++ 3.3 +++
 \subsection{Creating and Running a Scan Task}
 \textit{Note about the lab: This part was messy, to put it likely. I ran into one reoccuring problem over a couple of dozens of scans where the scans themselves just seemed to slide off of the target. Logs showed that ever scan was starting and ending without running any plugins against the target (although it was discovered alive). \\
-After over six hours of troubleshooting, I nuked the gvm build and restarted from scratch. }
-
+After over six hours of troubleshooting, I nuked the gvm build and restarted from scratch. This still failed to fix the issue, so troubleshooting continued.\\
+I started noticing that when I would check my ip addresses, one of the two channels on either of my machines would continually drop thier IP and connection. With some help from Claude, I was able to force IP loads on both machines and I was able to download the needed plugins and run my scan.}
+\newpage
+\noindent \includegraphics[width=0.50\textwidth]{images/3.2.png}\\ \textit{Figure 9: OpenVAS scan in progress.}\\
+\ \\
+\includegraphics[width=0.50\textwidth]{images/3.3.1.png}\\ \textit{Figure 10: OpenVAS scan results.}\\
+\ \\
+\includegraphics[width=0.45\textwidth]{images/3.3.2.png} \includegraphics[width=0.45\textwidth]{images/3.3.3.png}\\ \textit{Figure 11: OpenVAS scan top 5 findings.}\\
 \vfill
 \textit{++report written with (minimal) help from Claude (Sonnet 4.6)++}
 \end{document}
