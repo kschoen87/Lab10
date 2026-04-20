@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage{longtable}
+\usepackage[table]{xcolor}
 %\usepackage{lipsum} %remove later
 \doublespacing
 %\setlength\parindent{28 pt}
@@ -185,6 +186,65 @@ I started noticing that when I would check my ip addresses, one of the two chann
 \includegraphics[width=0.50\textwidth]{images/3.3.1.png}\\ \textit{Figure 10: OpenVAS scan results.}\\
 \ \\
 \includegraphics[width=0.45\textwidth]{images/3.3.2.png} \includegraphics[width=0.45\textwidth]{images/3.3.3.png}\\ \textit{Figure 11: OpenVAS scan top 5 findings.}\\
+\newpage
+
+% ++++ Part 04 ++++
+\section{Vulnerability Analysis \& Prioritization}
+
+% +++ 4.1 +++
+\subsection{Top-10 Findings}
+\begin{longtable}{
+    || >{\centering\arraybackslash}p{\colSmall}
+    | >{\raggedright\arraybackslash}p{\colSmall}
+    | >{\raggedright\arraybackslash}p{\colSmall}||}
+    \hline\hline
+    \multicolumn{3}{|c|}{\textbf{Priority}} \\
+    \hline
+    \cellcolor[HTML]{AE381B}\textbf{High} & \cellcolor[HTML]{E6A115}\textbf{Medium} & \cellcolor[HTML]{31728C}\textbf{Low} \\
+    \hline\hline
+\end{longtable}
+
+{\singlespacing
+	\begin{longtable}{
+ 		|| >{\centering\arraybackslash}p{\colNum}
+  		| >{\raggedright\arraybackslash}p{\colSmall}
+  		| >{\raggedright\arraybackslash}p{\colNum}
+  		| >{\raggedright\arraybackslash}p{\colNum}
+  		| >{\raggedright\arraybackslash}p{\colNum}
+        | >{\raggedright\arraybackslash}p{\colNum}
+  		| >{\raggedright\arraybackslash}p{\colSmall}
+        | >{\raggedright\arraybackslash}p{\colSmall} ||}
+		\hline
+		\textbf{\#} & \small{\textbf{Finding}} & \small{\textbf{CVE}} & \footnotesize{\textbf{CVSS Score}} & \tiny{\textbf{Severity}} & \small{\textbf{Port}} & \small{\textbf{Description}} & \small{\textbf{Source}} \\
+		\hline\hline
+		\endhead
+		\hline
+ 	    	 \cellcolor[HTML]{AE381B}1 & Anonymous FTP Login Reporting & CVE- 1999- 0497 & 6.4 & Med. & 21/ tcp & Reports if the remote FTP Server allows anonymous logins. & OpenVAS \\
+		\hline
+ 	    	 \cellcolor[HTML]{E6A115}2 & DoS via LANMAN Service & CVE- 2026- 33643 & 5.0 & Med & 445/ tcp & Remote attackers can cause a denial of service via a stream of malformed data. & Nmap \\
+		\hline
+        	\cellcolor[HTML]{E6A115}3 & Cleartext Transmission of Sensitive Information via HTTP & N/A & 4.8 & Med. & 80/ tcp & Attacker could use this to compromise or eavesdrop on the HTTP comms between the client and server. & OpenVAS \\
+		\hline
+          	 \cellcolor[HTML]{AE381B}4 & Unencrypted Cleartext Login & N/A & 4.8  & Med. & 21/ tcp & The remote host is running an FTP service that allows cleartext logins over unencrypted connections. & OpenVAS \\
+		\hline
+     	   	\cellcolor[HTML]{E6A115}5 & SQL Injection via SchemaHero 0.23.0 & CVE- 2026- 33643 & N/A  & N/A & 3306/ tcp & SQL Injection vulnerability in SchemaHero 0.23.0 via the column parameter to the mysqlColumnAsInsert function in file plugins/mysql/lib/ column.go & Nmap \\
+	    \hline
+     		 \cellcolor[HTML]{31728C}6 & Weak MAC Algorithm Supported (SSH) & N/A & 2.6  & Low & 22/ tcp & The remote host supports a weak MAC algorithm in SSH connections. & OpenVAS \\
+		\hline
+     	   	 \cellcolor[HTML]{31728C}7 & TCP Timestamp Info Disclosure & N/A & 2.6  & Low & 22/ tcp & The remote host implements TCP timestamps and therefore allows to compute the uptime. & OpenVAS \\
+		\hline
+        	 \cellcolor[HTML]{31728C}8 & ICMP Timestamp Reply Information Disclosure & CVE- 1999- 0524 & 2.1  & Low & general/ icmp & The remote host resonded ton ICMP timestamp request. & OpenVAS \\
+		\hline
+        
+	\end{longtable}
+}
+\noindent Note: First, I apologize for the short list. These were all of the vulnerabilities that my scans were able to find.\\
+Additionally, I want to note the process of making this list. The information contained comes directly from GreenBone/OpenVAS reports and nvd.nist.gov. However, when beginning my priority assessment, it was clear that some information would be difficult obtain as every government site I accessed has a brief disclosure about funding cuts at the top. As such, I had a hard time finding information on CVEs older than a couple of years.\\
+Since I hit this bump, I consulted with Claude to see what it thought of the list, what sort of information it could gather, and where it would get it from. It came up with sound reasoning behind its findings and let me know the following: \\
+\textit{"One heads-up worth noting in your report: NVD is currently redirecting CVE detail pages rather than serving them directly, which is consistent with the funding/maintenance issues you mentioned. The scores I've cited come from Tenable, Greenbone/OpenVAS, and CVEdetails as secondary sources..."}
+
+
+
 \vfill
 \textit{++report written with (minimal) help from Claude (Sonnet 4.6)++}
 \end{document}
