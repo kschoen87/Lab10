@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.13)  20 APR 2026 15:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.11.13)  20 APR 2026 23:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -543,11 +543,6 @@ Overfull \hbox (1.02112pt too wide) in paragraph at lines 224--224
  []
 
 
-Overfull \hbox (1.19055pt too wide) in paragraph at lines 224--224
-\OT1/cmr/m/n/12 33643|  
- []
-
-
 Overfull \hbox (1.02112pt too wide) in paragraph at lines 230--230
 []|\OT1/cmr/m/n/12 CVE- 
  []
@@ -573,11 +568,11 @@ Overfull \hbox (14.24597pt too wide) in paragraph at lines 236--236
  []
 
 
-Overfull \hbox (1.05319pt too wide) in alignment at lines 220--239
+Overfull \hbox (1.05319pt too wide) in alignment at lines 220--238
  [] [] [] [] [] [] [] [] 
  []
 
-c:/Users/kasch/OneDrive/Desktop/Spring26/Defense/Lab10/Schoen_Keith_Lab10.tex:239: ignored error: Infinite glue shrinkage found in box being split
+c:/Users/kasch/OneDrive/Desktop/Spring26/Defense/Lab10/Schoen_Keith_Lab10.tex:238: ignored error: Infinite glue shrinkage found in box being split
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -601,24 +596,88 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[13] (Schoen_Keith_Lab10.aux)
+[13]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14]
+Overfull \hbox (48.59459pt too wide) in paragraph at lines 279--280
+\OT1/cmtt/m/n/12 -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.key
+ []
+
+
+Overfull \hbox (78.947pt too wide) in paragraph at lines 293--294
+\OT1/cmr/m/n/12 via plain FTP will stop work-ing once \OT1/cmtt/m/n/12 force$[]$local$[]$data$[]$ssl=YES \OT1/cmr/m/n/12 and \OT1/cmtt/m/n/12 force$[]$local$[]$logins$[]$ssl=YES
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15]
+Overfull \hbox (32.89397pt too wide) in paragraph at lines 294--295
+[]\OT1/cmr/bx/n/12 Verification\OT1/cmr/m/n/12 : Run com-mand \OT1/cmtt/m/n/12 curl --ssl-reqd ftp://127.0.0.1 -u username:password
+ []
+
+
+Overfull \hbox (27.34178pt too wide) in paragraph at lines 305--306
+\OT1/cmtt/m/n/12 -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/medtech.key -out
+ []
+
+<images/5.1.1.png, id=97, 530.98375pt x 162.10562pt>
+File: images/5.1.1.png Graphic file (type png)
+<use images/5.1.1.png>
+Package pdftex.def Info: images/5.1.1.png  used on input line 306.
+(pdftex.def)             Requested size: 234.8775pt x 71.70761pt.
+<images/5.1.2.png, id=98, 532.48938pt x 125.97063pt>
+File: images/5.1.2.png Graphic file (type png)
+<use images/5.1.2.png>
+Package pdftex.def Info: images/5.1.2.png  used on input line 308.
+(pdftex.def)             Requested size: 234.8775pt x 55.5637pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16 <./images/5.1.1.png> <./images/5.1.2.png>]
+Overfull \hbox (55.73987pt too wide) in paragraph at lines 311--312
+[]\OT1/cmr/bx/n/12 Verification\OT1/cmr/m/n/12 : Test the redi-rect by run-ning com-mand \OT1/cmtt/m/n/12 curl -I https://192.168.56.102/login\OT1/cmr/m/n/12 .
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17] (Schoen_Keith_Lab10.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4881 strings out of 467871
- 75418 string characters out of 5418375
+ 4902 strings out of 467871
+ 75876 string characters out of 5418375
  513328 words of memory out of 5000000
- 33702 multiletter control sequences out of 15000+600000
- 636402 words of font info for 71 fonts, out of 8000000 for 9000
+ 33722 multiletter control sequences out of 15000+600000
+ 636571 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 58i,11n,74p,517b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\kasch\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Schoen_Keith_Lab10.pdf (15 pages, 1469736 bytes).
+ 58i,11n,74p,977b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\kasch\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/kasch/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Schoen_Keith_Lab10.pdf (19 pages, 1532209 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
+ 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
